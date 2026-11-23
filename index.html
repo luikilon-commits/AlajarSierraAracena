@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sierra de Aracena 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday: a trip companion to carry in the pocket, clear and calm
+   IDEA the cuaderno of a sierra village: whitewashed walls, almagre plinths, encina green
+   PICTURE a layered skyline of Alájar under the Peña de Arias Montano, at day or night
+   COLOUR cal white ground, encina green fields, almagre red accent, castaño brown support
+   TYPE Archivo 800 titles + Atkinson Hyperlegible text
+   LAYOUT skyline band ~30%, then the active tab; bottom tab bar on phone, top on laptop */
+:root{color-scheme:light dark;--bg:light-dark(#fbfaf6,#10150f);--ink:light-dark(#18201a,#eef0e8);--soft:light-dark(#5b6458,#a9b2a4);--card:light-dark(#ffffff,#18201a);--line:light-dark(#dfe2d8,#2c362b);--green:light-dark(#22432e,#1b3324);--green2:light-dark(#2f5a3e,#2b4d36);--alm:light-dark(#b23a22,#e2694d);--cast:light-dark(#7a4a24,#c9925e);--tint:light-dark(#eef2ea,#1c271d)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;letter-spacing:-.02em;line-height:1.05;margin:0}
+a{color:inherit}
+.hero{position:relative;background:var(--green);color:#fff;overflow:hidden}
+.hero svg{display:block;width:100%;height:clamp(150px,26vw,240px)}
+.htext{position:absolute;left:max(5vw,16px);top:clamp(14px,3vw,28px);right:16px}
+.htext h1{font-size:clamp(30px,5vw,48px);font-weight:800;text-wrap:balance;max-width:14ch}
+.htext p{margin:6px 0 0;font-size:15px;opacity:.92}
+.wrap{max-width:1000px;margin:0 auto;padding:0 max(4vw,16px)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--green);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 2px 8px;color:#d9e6d6;text-decoration:none;font:700 12px Archivo,sans-serif;min-height:56px;justify-content:center}
+nav.tabs a svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+nav.tabs a[aria-current=page]{color:#fff;background:var(--green2);box-shadow:inset 0 3px 0 var(--alm)}
+@media(min-width:900px){body{padding-bottom:0}nav.tabs{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(6,auto);justify-content:center;gap:4px}nav.tabs a{flex-direction:row;font-size:15px;padding:12px 18px;gap:8px}}
+section.view{display:none;padding:22px 0 30px}
+section.view.on{display:block}
+.view>h2{font-size:clamp(26px,4vw,36px);margin-bottom:6px}
+.lead{color:var(--soft);margin:0 0 18px;max-width:62ch}
+.days{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 0 12px}
+.days button{flex:none;scroll-snap-align:start;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 14px;min-height:52px;font:700 15px Archivo,sans-serif;cursor:pointer;text-align:left;line-height:1.15}
+.days button small{display:block;font:400 13px "Atkinson Hyperlegible",sans-serif;color:var(--soft)}
+.days button[aria-pressed=true]{background:var(--alm);border-color:var(--alm);color:#fff}
+.days button[aria-pressed=true] small{color:#fff}
+.day{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.day h3{font-size:24px}
+.day .sub{color:var(--soft);margin:4px 0 12px}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.sched .t{font:800 17px Archivo,sans-serif;color:var(--alm);white-space:nowrap}
+.sched b{display:block}
+.sched p{margin:2px 0 0;color:var(--soft);font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--tint);text-decoration:none;font:700 14px Archivo,sans-serif;color:var(--ink)}
+.btn.go{background:var(--green);border-color:var(--green);color:#fff}
+.btn:focus-visible,.days button:focus-visible,nav.tabs a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--alm);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.card h3{font-size:20px}
+.card .where{color:var(--cast);font-weight:700;font-size:14px}
+.card p{margin:0;font-size:15px}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.facts span{background:var(--tint);border-radius:8px;padding:3px 8px;font-size:13px;white-space:nowrap}
+.note{border-left:4px solid var(--alm);background:var(--tint);padding:12px 14px;border-radius:0 12px 12px 0;margin:0 0 16px;font-size:15px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px}
+.steps li{counter-increment:s;position:relative;padding:14px 0 14px 52px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font:800 18px Archivo,sans-serif}
+.steps b{display:block;font-family:Archivo,sans-serif;font-size:18px}
+.steps p{margin:4px 0 0;font-size:15px}
+.tels{display:grid;gap:10px}
+.tel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tel small{display:block;color:var(--soft);font-size:13px}
+.tel a{font:800 17px Archivo,sans-serif;white-space:nowrap;text-decoration:none;color:var(--alm)}
+.tel.sos{border-color:var(--alm);border-width:2px}
+.grp{font-size:20px;margin:22px 0 10px}
+#q{width:100%;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:14px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+summary{font:700 17px Archivo,sans-serif;cursor:pointer;min-height:28px}
+.chk{list-style:none;padding:0;margin:0 0 16px}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);cursor:pointer}
+.chk input{width:22px;height:22px;flex:none;accent-color:var(--alm);margin-top:2px}
+.foot{color:var(--soft);font-size:13px;padding:10px 0 24px}
+@media (prefers-reduced-motion:no-preference){.smoke{animation:drift 9s ease-in-out infinite alternate}@keyframes drift{to{transform:translate(14px,-10px);opacity:.15}}}
+</style>
+</head>
+<body>
+<header class="hero">
+<svg id="sky" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<defs>
+<linearGradient id="g0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a5238"/><stop offset="1" stop-color="#22432e"/></linearGradient>
+<g id="house"><rect x="0" y="10" width="34" height="26" fill="#f6f4ec"/><rect x="0" y="30" width="34" height="6" fill="#b23a22"/><path d="M-3 11 L17 0 L37 11Z" fill="#8a4b2a"/><rect x="12" y="18" width="8" height="12" fill="#2a3a2c"/></g>
+<g id="tree"><rect x="-2" y="10" width="4" height="12" fill="#3b2a1a"/><ellipse cx="0" cy="6" rx="14" ry="11" fill="#1d3a26"/><ellipse cx="-4" cy="2" rx="7" ry="5" fill="#2f5a3e"/></g>
+</defs>
+<rect width="1200" height="240" fill="url(#g0)"/>
+<path d="M0 150 C150 90 260 120 380 95 C520 65 640 110 760 80 C900 45 1040 95 1200 70 L1200 240 L0 240Z" fill="#355f43" opacity=".55"/>
+<path d="M600 175 L700 70 C720 50 760 48 790 60 L860 95 L880 175Z" fill="#c9c6b6"/>
+<path d="M700 70 C720 50 760 48 790 60 L800 75 C770 66 735 70 712 88Z" fill="#e6e3d6"/>
+<path d="M0 185 C200 150 330 170 480 160 C640 150 800 175 980 155 C1080 145 1150 160 1200 155 L1200 240 L0 240Z" fill="#2b4d36"/>
+<g id="village"></g>
+<path d="M0 222 C300 205 600 215 900 205 C1020 200 1120 210 1200 206 L1200 240 L0 240Z" fill="#1b3324"/>
+<circle class="smoke" cx="1010" cy="120" r="10" fill="#fff" opacity=".35"/>
+</svg>
+<div class="htext"><h1>Sierra de Aracena</h1><p>6–11 de diciembre · Base: Posada San Marcos, Alájar</p></div>
+</header>
+
+<nav class="tabs" aria-label="Secciones">
+<a href="#plan" data-v="plan"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Plan</a>
+<a href="#rutas" data-v="rutas"><svg viewBox="0 0 24 24"><path d="M3 20l6-12 4 7 3-4 5 9z"/></svg>Rutas</a>
+<a href="#comer" data-v="comer"><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M16 3c-2 2-2 7 0 9v9"/></svg>Comer</a>
+<a href="#ver" data-v="ver"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6"/></svg>Visitas</a>
+<a href="#odiel" data-v="odiel"><svg viewBox="0 0 24 24"><path d="M3 15c3-2 5 2 9 0s6 2 9 0M3 19c3-2 5 2 9 0s6 2 9 0M14 4c2 0 3 2 3 4l-3 2-4-1"/></svg>Odiel</a>
+<a href="#sos" data-v="sos"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2 1a11 11 0 005 5l1-2 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>Teléfonos</a>
+</nav>
+
+<main class="wrap">
+
+<section class="view" id="v-plan">
+<h2>Plan día a día</h2>
+<p class="lead">Todas las salidas son desde Alájar. El botón verde abre la ruta en coche desde el hotel. Toca un día para verlo.</p>
+<div class="days" id="days"></div>
+<div id="day"></div>
+<h3 class="grp">Antes de salir de casa</h3>
+<ul class="chk" id="chk"></ul>
+</section>
+
+<section class="view" id="v-rutas">
+<h2>Rutas de senderismo</h2>
+<p class="lead">Todas de un día, suaves o moderadas y como mucho 12 km ida y vuelta. Distancias y desniveles según fichas oficiales o tracks publicados; tiempos en coche aproximados.</p>
+<div class="note"><b>¿Hace falta permiso?</b> No para estos senderos señalizados del Parque Natural: las fichas oficiales no piden autorización (a diferencia de algunos senderos del Odiel, que sí la piden y lo indican). Si tenéis dudas o queréis el estado de los caminos tras lluvias: Centro de Visitantes Cabildo Viejo (Aracena) <b>959 129 553</b> · Oficina del Parque <b>959 129 539</b>.</div>
+<div class="grid" id="rutas"></div>
+</section>
+
+<section class="view" id="v-comer">
+<h2>Dónde comer</h2>
+<p class="lead">Elegidos por calidad-precio y opiniones. El 6, 7 y 8 es puente: reservad siempre.</p>
+<div class="grid" id="comer"></div>
+<p class="foot">Horarios de cocina cambiables en invierno; llamad antes, sobre todo entre semana.</p>
+</section>
+
+<section class="view" id="v-ver">
+<h2>Visitas, agenda y mercados</h2>
+<p class="lead">Cultura por la zona, lo que hay esos días y dónde comprar.</p>
+<h3 class="grp">Agenda del 6 al 11</h3>
+<div class="grid" id="agenda"></div>
+<h3 class="grp">Visitas culturales</h3>
+<div class="grid" id="ver"></div>
+<h3 class="grp">Mercadillos</h3>
+<div class="grid" id="mercados"></div>
+</section>
+
+<section class="view" id="v-odiel">
+<h2>Marismas del Odiel</h2>
+<p class="lead">Propuesta para el miércoles 9 (lunes el centro cierra). Paraje Natural y Reserva de la Biosfera en la desembocadura del Tinto y el Odiel, con flamencos, espátulas y águila pescadora.</p>
+<div class="note"><b>En resumen:</b> para la visita normal (centro de visitantes + senderos Calatilla de Bacuta y Salinas de Bacuta + miradores de la carretera del Dique) <b>no hace falta permiso</b>. Solo lo necesitan los senderos El Acebuchal, El Almendral y La Cascajera, y las Reservas Naturales Isla de Enmedio y Marisma del Burro tienen la máxima protección.</div>
+<ol class="steps" id="odiel"></ol>
+<div class="btns"><a class="btn go" target="_blank" rel="noopener" id="odielgo">Ir desde Alájar al Centro de Visitantes</a></div>
+</section>
+
+<section class="view" id="v-sos">
+<h2>Teléfonos y contactos</h2>
+<p class="lead">Si un enlace de llamada no funciona en tu móvil, el número está escrito al lado.</p>
+<input id="q" type="search" placeholder="Buscar: taxi, hospital, Gruta…" aria-label="Buscar contacto">
+<div id="tels"></div>
+</section>
+
+</main>
+
+<script>
+{
+const HOTEL='Posada San Marcos, Calle Colón 12, 21340 Alájar';
+const go=d=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(HOTEL)+'&destination='+encodeURIComponent(d)+'&travelmode=driving';
+const map=d=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(d);
+const tel=n=>'<a href="tel:+34'+n.replace(/\s/g,'')+'">'+n+'</a>';
+const B=(t,d,cls)=>'<a class="btn'+(cls?' go':'')+'" target="_blank" rel="noopener" href="'+(cls?go(d):map(d))+'">'+t+'</a>';
+
+/* skyline village */
+{let s=7,r=()=>(s=s*16807%2147483647)/2147483647,h='';
+for(let i=0;i<18;i++){const x=470+i*22+r()*10,y=150+r()*18;h+='<use href="#house" x="'+x.toFixed(0)+'" y="'+y.toFixed(0)+'"/>'}
+h+='<g transform="translate(610 118)"><rect x="0" y="0" width="16" height="44" fill="#f6f4ec"/><path d="M-2 0 L8 -14 L18 0Z" fill="#8a4b2a"/><rect x="5" y="8" width="6" height="8" fill="#2a3a2c"/></g>';
+for(let i=0;i<26;i++){const x=r()*1200,y=178+r()*30;if(x>450&&x<900&&y<190)continue;h+='<use href="#tree" x="'+x.toFixed(0)+'" y="'+y.toFixed(0)+'"/>'}
+document.getElementById('village').innerHTML=h}
+
+/* PLAN */
+const DAYS=[
+{d:'Dom 6',n:'Llegada y Alájar',sub:'Festivo. Si llegáis pronto, el Mercado del Queso de Aracena está montado.',it:[
+['Mañana','Mercado del Queso Artesano, Aracena','Pabellón Ferial, del 5 al 8. Aparcad en zona blanca (Av. Reina de los Ángeles) y subid andando.','Pabellón Ferial Aracena'],
+['Mañana','Plan B: Migas Solidarias en La Umbría','Aldea de Aracena, el día 6. Ambiente de pueblo y causa benéfica.','La Umbría, Aracena'],
+['16:30','Check-in en la Posada San Marcos','Recepción de 16:30 a 20:00; avisad de la hora de llegada. Aparcamiento propio gratuito.',''],
+['Tarde','Peña de Arias Montano al atardecer','A 1 km. Aparcamiento junto a la ermita de la Reina de los Ángeles. Miradores sobre Alájar.','Peña de Arias Montano, Alájar'],
+['21:00','Cena en Alájar','Mesón El Corcho (plaza del Ayuntamiento) o Casa El Padrino. Reservad.','']]},
+{d:'Lun 7',n:'Aracena entera',sub:'Gruta, castillo y, por la noche, los Rehiletes.',it:[
+['10:00','Gruta de las Maravillas','Visita guiada. Abre 10:00–13:30 y 15:00–18:00. Aforo de 1.000 personas al día: reservad (663 937 876).','Gruta de las Maravillas, Aracena'],
+['12:00','Castillo, Iglesia Prioral y Cabildo Viejo','El Cabildo Viejo es el centro de visitantes del Parque: mapas de senderos y audioguía gratis. Existe tarjeta conjunta castillo + gruta + museo.','Cabildo Viejo, Plaza Alta, Aracena'],
+['14:00','Comida en Aracena','Tapas Jesús Carrión (junto a la Gruta) o Rincón de Juan.',''],
+['16:30','Museo del Jamón y Mercado del Queso','Museo en la Gran Vía. El mercado sigue en el Pabellón Ferial hasta el día 8.','Museo del Jamón, Gran Vía, Aracena'],
+['Noche','Los Rehiletes','Víspera de la Inmaculada: candela en cada barrio y los niños quemando rehiletes. Tradición de Aracena.','Aracena']]},
+{d:'Mar 8',n:'A pie hasta Linares',sub:'Festivo. Ruta corta y comida en un Bib Gourmand.',it:[
+['10:30','Sendero Alájar – Linares de la Sierra','Sale del pueblo, sin coche. 3,8 km de ida por camino antiguo; volved por el mismo (7,6 km en total).','Linares de la Sierra'],
+['13:30','Comida en Arrieros (Linares)','Solo mediodía, 13:30–16:00. Reservad ya: 959 463 717. Cocina de ibérico; sopa de tomate de la casa.','Restaurante Arrieros, Linares de la Sierra'],
+['16:30','Vuelta a Alájar','Mismo sendero de vuelta. Si alguien no quiere andar, que lleve el coche a Linares y aparque a la entrada del pueblo.',''],
+['Tarde','Paseo por Alájar','Conjunto histórico. Café en la plaza.','']]},
+{d:'Mié 9',n:'Marismas del Odiel',sub:'Excursión a la costa. Unos 110 km; aprox. 1 h 20–1 h 30.',it:[
+['8:45','Salida desde Alájar','Llevad prismáticos, agua y algo de abrigo: en la marisma no hay sombra ni refugio del viento.','Centro de Visitantes Anastasio Senra, Huelva'],
+['10:15','Centro de Visitantes Anastasio Senra','Ctra. del Dique Juan Carlos I, km 3. Exposición y observatorio de aves. Aparcad aquí.','Centro de Visitantes Anastasio Senra, Huelva'],
+['11:00','Senderos Calatilla y Salinas de Bacuta','Libres, sin permiso, salen del propio centro. Observatorio y miradores sobre la Isla de Enmedio.',''],
+['13:30','Comida','Kiosco-bar del centro, o en Punta Umbría (a pocos minutos).','Punta Umbría'],
+['Opc.','Mercadillo de Aljaraque o barco al atardecer','Aljaraque: miércoles 9:00–14:00 en el Recinto Ferial. Barco por las marismas desde Punta Umbría (1,5–2 h, reservar con 24 h).','Recinto Ferial Aljaraque']]},
+{d:'Jue 10',n:'Castaño del Robledo y Galaroza',sub:'Bosque de castaños y dos pueblos con mucho carácter.',it:[
+['10:00','Circular Castaño del Robledo – Galaroza','10,6 km, +250 m, moderada. Versión corta: Castaño – Puente de los Casares (7,2 km ida y vuelta).','Castaño del Robledo'],
+['14:00','Comida en Castaño','Maricastaña (abre jueves a domingo a mediodía) o Mesón El Roble.','Castaño del Robledo'],
+['17:00','Jabugo o Fuenteheridos','Jabugo para comprar ibérico; Fuenteheridos para pasear antes de volver.','Jabugo']]},
+{d:'Vie 11',n:'Almonaster y regreso',sub:'Check-out por la mañana y última parada en la mezquita.',it:[
+['10:30','Mezquita de Almonaster la Real','Mezquita rural de los siglos IX–X sobre el cerro. Aparcad abajo y subid 5 minutos andando desde la plaza.','Mezquita de Almonaster la Real'],
+['13:30','Comida: El Rincón de Curro','El mejor valorado del pueblo; terraza y chimenea. Plan B: Isabel II (tapas).','El Rincón de Curro, Almonaster la Real'],
+['Alt.','Parque Minero de Riotinto','Si preferís otra cosa: museo minero, ferrocarril y Peña de Hierro. Reservas 959 590 025.','Parque Minero de Riotinto']]}];
+const dEl=document.getElementById('days'),dayEl=document.getElementById('day');
+let cur=0;try{cur=+localStorage.getItem('ar-day')||0}catch(e){}
+const drawDay=()=>{dEl.innerHTML=DAYS.map((x,i)=>'<button type="button" id="d'+i+'" aria-pressed="'+(i===cur)+'" data-i="'+i+'">'+x.d+'<small>'+x.n+'</small></button>').join('');
+const x=DAYS[cur];dayEl.innerHTML='<div class="day"><h3>'+x.d+' · '+x.n+'</h3><p class="sub">'+x.sub+'</p><ul class="sched">'+x.it.map(a=>'<li><span class="t">'+a[0]+'</span><div><b>'+a[1]+'</b><p>'+a[2]+'</p>'+(a[3]?'<div class="btns">'+B('Cómo llegar',a[3],1)+'</div>':'')+'</div></li>').join('')+'</ul></div>'};
+dEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=+b.dataset.i;try{localStorage.setItem('ar-day',cur)}catch(er){}drawDay()});
+drawDay();
+
+const CHK=['Reservar Arrieros para el martes 8 (959 463 717)','Reservar la Gruta de las Maravillas para el lunes 7 (663 937 876)','Reservar cenas del 6 y 7 en Alájar o Aracena','Llamar al C.V. Anastasio Senra para confirmar horario del miércoles (682 654 491)','Avisar a la Posada de la hora de llegada','Descargar mapas sin conexión de la sierra en el móvil','Calzado de montaña, chubasquero y frontal (anochece pronto)','Prismáticos para el Odiel'];
+let done={};try{done=JSON.parse(localStorage.getItem('ar-chk')||'{}')}catch(e){}
+document.getElementById('chk').innerHTML=CHK.map((c,i)=>'<li><label><input type="checkbox" id="c'+i+'" data-i="'+i+'"'+(done[i]?' checked':'')+'>'+c+'</label></li>').join('');
+document.getElementById('chk').addEventListener('change',e=>{done[e.target.dataset.i]=e.target.checked;try{localStorage.setItem('ar-chk',JSON.stringify(done))}catch(er){}});
+
+/* RUTAS */
+const RUTAS=[
+['Peña de Arias Montano y Mirador de Alájar','Alájar','6,3 km','+310 m','Circular','Moderada','Sale del pueblo (0 min)','En el hotel, o en la explanada de la ermita de la Peña.','Subida a la Peña, ermita de la Reina de los Ángeles y mirador sobre el pueblo. La mejor para el primer día.','Peña de Arias Montano, Alájar'],
+['Alájar – Linares de la Sierra','Alájar','7,6 km i/v','Lineal 3,8 km','Ida y vuelta','Moderada','Sale del pueblo (0 min)','En el hotel. En Linares, a la entrada del pueblo (calles empedradas y estrechas).','Camino viejo entre pueblos con vistas a la Peña al volver. Se combina con comer en Linares.','Linares de la Sierra'],
+['Alájar – Puerto de Alájar – Puerto de Linares','Alájar','5,5 km','+215 m','Circular','Moderada','Sale del pueblo (0 min)','En el hotel.','Vuelta corta por los dos puertos sobre el pueblo. Buena para una mañana tranquila.','Alájar'],
+['Castaño del Robledo – Galaroza','Castaño del Robledo','10,6 km','+250 m','Circular','Moderada','Aprox. 15–20 min','No hay aparcamiento en el inicio: dejad el coche a la entrada de Castaño y entrad andando.','Castañares, la Ribera de Jabugo y el casco histórico de Galaroza.','Castaño del Robledo'],
+['Castaño del Robledo – Puente de los Casares','Castaño del Robledo','7,2 km i/v','Lineal 3,6 km','Ida y vuelta','Media, por carril','Aprox. 15–20 min','A la entrada de Castaño del Robledo.','Versión corta de la anterior, por carril cómodo hasta el puente.','Castaño del Robledo'],
+['Circular de Fuenteheridos','Fuenteheridos','10 km','+256 m','Circular','Fácil','Aprox. 15 min','En las calles de acceso al pueblo.','Paseo amable por castaños y huertas alrededor del pueblo.','Fuenteheridos']];
+document.getElementById('rutas').innerHTML=RUTAS.map(r=>'<article class="card"><span class="where">Inicio: '+r[1]+'</span><h3>'+r[0]+'</h3><div class="facts"><span>'+r[2]+'</span><span>'+r[3]+'</span><span>'+r[4]+'</span><span>'+r[5]+'</span><span>Coche: '+r[6]+'</span></div><p>'+r[8]+'</p><p><b>Aparcar:</b> '+r[7]+'</p><div class="btns">'+B('Ir en coche',r[9],1)+B('Ver en mapa',r[9])+'</div></article>').join('');
+
+/* COMER */
+const COMER=[
+['Arrieros','Linares de la Sierra','Bib Gourmand de Michelin. Ibérico, casquería fina y sopa de tomate. Unos 35 € por persona a la carta; menús de 45 y 55 €. Solo mediodía (13:30–16:00); Michelin lo da cerrado el miércoles, otras fuentes el lunes: el martes es seguro.','959 463 717','Restaurante Arrieros, Linares de la Sierra'],
+['Casa El Padrino','Alájar','Cocina serrana con chimenea; la presa ibérica es la que nombran todos. Pl. Miguel Moya, 2.','959 125 601','Casa El Padrino, Alájar'],
+['Mesón El Corcho','Alájar','En la plaza del Ayuntamiento. Raciones grandes y muy buena relación calidad-precio; chimenea y brasero.','','Mesón El Corcho, Alájar'],
+['Casa Cruz','Alájar','Pequeño, producto de calidad: pisto, croquetas y setas cuando hay.','','Casa Cruz, Alájar'],
+['Peña Flamenca La Plazita','Alájar','Pizza de horno de leña, cada una con nombre de palo flamenco. Para una cena sin complicaciones.','','Peña Cultural Flamenca La Plazita, Alájar'],
+['Tapas Jesús Carrión','Aracena','Al lado de la Gruta. Casero, 20–30 €. Muy valorado.','','Restaurante Tapas Jesús Carrión, Aracena'],
+['Rincón de Juan','Aracena','Clásico de tapas serranas en el centro.','','Rincón de Juan, Aracena'],
+['Montecruz','Aracena','Plaza de San Pedro. Cocina tradicional y chacinas.','959 126 013','Restaurante Montecruz, Aracena'],
+['Maricastaña','Castaño del Robledo','Cocina de temporada. Abre jueves a domingo 13:00–17:00; cenas viernes y sábado.','','Restaurante Maricastaña, Castaño del Robledo'],
+['Mesón El Roble','Castaño del Robledo','Albóndigas de ibérico y revuelto de setas a precio razonable.','','Mesón El Roble, Castaño del Robledo'],
+['Mesón Los Canastos','Jabugo','20–30 €. Se llena: mejor reservar.','','Mesón Los Canastos, Jabugo'],
+['El Rincón de Curro','Almonaster la Real','El mejor valorado del pueblo (8,5 sobre 10 con más de 1.300 opiniones). Terraza y salón con chimenea.','','El Rincón de Curro, Almonaster la Real']];
+document.getElementById('comer').innerHTML=COMER.map(c=>'<article class="card"><span class="where">'+c[1]+'</span><h3>'+c[0]+'</h3><p>'+c[2]+'</p>'+(c[3]?'<p><b>Tel.</b> '+tel(c[3])+'</p>':'')+'<div class="btns">'+B('Ir en coche',c[4],1)+'</div></article>').join('');
+
+/* AGENDA, VER, MERCADOS */
+const card=(w,h,p,dst)=>'<article class="card"><span class="where">'+w+'</span><h3>'+h+'</h3><p>'+p+'</p>'+(dst?'<div class="btns">'+B('Ir en coche',dst,1)+'</div>':'')+'</article>';
+document.getElementById('agenda').innerHTML=[
+['Aracena · 5 al 8','XXIV Mercado del Queso Artesano','Pabellón Ferial. Más de veinte queserías de la sierra.','Pabellón Ferial Aracena'],
+['La Umbría (Aracena) · 6','Migas Solidarias','Comida popular benéfica en la aldea.','La Umbría, Aracena'],
+['Aracena · noche del 7','Los Rehiletes','Candelas por barrios en la víspera de la Inmaculada.','Aracena'],
+['Higuera de la Sierra · 5 al 7','Belén viviente','Parque de El Charcón, desde las 17:00.','Higuera de la Sierra'],
+['Teatro Sierra de Aracena','Teatro: sin programación localizada','No hemos encontrado funciones publicadas del 6 al 11. Preguntad: 663 937 879 · teatro@ayto-aracena.es','Teatro Sierra de Aracena']].map(a=>card(...a)).join('');
+document.getElementById('ver').innerHTML=[
+['Alájar','Peña de Arias Montano','Bien de Interés Cultural: farallón calizo, manantiales y ermita del s. XVI donde se retiró el humanista Arias Montano.','Peña de Arias Montano, Alájar'],
+['Aracena','Gruta de las Maravillas','Primera cueva turística de España (1913). Guiada, unos 50 min. Cierra 24, 25 y 31 dic. Tel. 663 937 876.','Gruta de las Maravillas, Aracena'],
+['Aracena','Castillo e Iglesia Prioral','Fortaleza sobre el pueblo e iglesia gótico-mudéjar, BIC. Tarjeta conjunta con Gruta y Museo del Jamón.','Castillo de Aracena'],
+['Aracena','Museo del Jamón','Siete salas sobre el cerdo ibérico y la dehesa. Gran Vía.','Museo del Jamón Aracena'],
+['Aracena','Cabildo Viejo','Centro de visitantes del Parque en edificio del s. XV. Audioguía gratuita. Tel. 959 129 553.','Cabildo Viejo Aracena'],
+['Almonaster la Real','Mezquita','Mezquita de los siglos IX–X, de las pocas rurales que quedan en España. Tel. 959 143 003.','Mezquita de Almonaster la Real'],
+['Minas de Riotinto','Parque Minero','Museo minero, Casa 21, ferrocarril y mina de Peña de Hierro. Tel. 959 590 025.','Parque Minero de Riotinto'],
+['Pueblos','Ruta de pueblos','Linares de la Sierra, Castaño del Robledo, Galaroza, Fuenteheridos, Jabugo y Cortegana (castillo): cortos en coche desde Alájar.','Castaño del Robledo']].map(a=>card(...a)).join('');
+document.getElementById('mercados').innerHTML=[
+['Aracena · 6, 7 y 8','Mercado del Queso Artesano','El mercado que sí coincide con el viaje. Ideal para comprar queso de cabra serrano.','Pabellón Ferial Aracena'],
+['Aljaraque · miércoles 9','Mercadillo semanal','9:00–14:00, Recinto Ferial. Al lado del Odiel: encaja en esa excursión.','Recinto Ferial Aljaraque'],
+['Fregenal de la Sierra · martes 8','Mercadillo semanal','9:00–14:00, calle Orihuela Grande (Badajoz). Al ser festivo el 8, confirmad que se monta.','Fregenal de la Sierra'],
+['Aracena · sábados','Mercadillo semanal','9:00–14:00 en el Recinto Ferial. Ojo: este viaje no pilla ningún sábado.','Recinto Ferial Aracena']].map(a=>card(...a)).join('');
+
+/* ODIEL */
+const OD=[
+['Confirma horario (2–3 días antes)','Centro de Visitantes Anastasio Senra: 682 654 491 / 671 564 186 · cvanastasiosenra.amaya@juntadeandalucia.es. Lunes cerrado; abre por la mañana (9:00/10:00–14:00) y algunas tardes según temporada. Pregunta por mareas y por dónde se están viendo los flamencos.'],
+['El trayecto','Desde Alájar hacia Huelva (aprox. 1 h 20–1 h 30). En la autovía Huelva–Punta Umbría (A-497), km 3, salida «Paraje Natural Marismas del Odiel». Sigue la Carretera del Dique Juan Carlos I hasta el km 3, junto al área recreativa Calatilla.'],
+['Aparca en el centro de visitantes','Es el aparcamiento recomendado para los senderos de la zona. Ve primero a la exposición: explica mareas, aves y la historia del estuario.'],
+['Senderos libres (sin permiso)','Calatilla de Bacuta (unos 0,8 km, junto al centro, sobre las salinas) y Salinas de Bacuta (observatorio y miradores frente a la Isla de Enmedio). Por la carretera del Dique hay más miradores y observatorios.'],
+['Senderos con autorización (solo si os interesa)','El Acebuchal (825 m, junto al yacimiento de la Isla de Saltés), El Almendral y La Cascajera. La solicitud la presentan las empresas autorizadas de visitas, por registro electrónico (certificado digital o Cl@ve) dirigido al Paraje Natural, o en el registro de la Delegación Territorial de Sostenibilidad y Medio Ambiente, C/ Sanlúcar de Barrameda 3, Huelva (959 011 500). La vía práctica: contratar una empresa de guías con antelación y que lo tramite ella.'],
+['Visita guiada o barco (opcional)','Hay salidas guiadas de observación de aves de medio día (p. ej. Wild Doñana) y paseos en barco por las marismas desde Punta Umbría, de 1,5–2 h, que se reservan hasta 24 h antes.'],
+['Qué llevar y normas','Prismáticos, agua, gorra y cortavientos: no hay sombra. No salir de los senderos, que el ecosistema es muy sensible. Emergencias: 112.']];
+document.getElementById('odiel').innerHTML=OD.map(o=>'<li><b>'+o[0]+'</b><p>'+o[1]+'</p></li>').join('');
+document.getElementById('odielgo').href=go('Centro de Visitantes Anastasio Senra, Huelva');
+
+/* TELÉFONOS */
+const TELS=[
+['Urgencias',[['Emergencias (todo)','112','',1],['Emergencias sanitarias','061','',1],['Guardia Civil','062','',1],['Hospital de Riotinto','959 025 200','Hospital comarcal. Avda. La Esquila, 5, Minas de Riotinto'],['Centro de Salud de Aracena','','Urgencias 24 h en el centro de salud, frente a la estación de autobuses. Llamad antes al 061'],['Salud Responde (Junta)','955 545 060','Consultas sanitarias y cita médica'],['Carreteras: estado del tráfico (DGT)','011','']]],
+['Alojamiento y transporte',[['Posada San Marcos (hotel)','959 125 712','Calle Colón 12, Alájar'],['Taxi Aracena','959 128 429','También 617 422 003 · 620 641 534'],['Estación de autobuses Aracena','959 127 674','Damas']]],
+['Parques y espacios naturales',[['C.V. Cabildo Viejo (Parque Natural)','959 129 553','También 692 219 701 · Plaza Alta, Aracena'],['Oficina del Parque Natural Sierra de Aracena','959 129 539',''],['C.V. Anastasio Senra (Odiel)','682 654 491','También 671 564 186 · cvanastasiosenra.amaya@juntadeandalucia.es'],['Delegación de Medio Ambiente Huelva','959 011 500','Autorizaciones del Odiel · C/ Sanlúcar de Barrameda 3'],['Reserva tu visita (Junta)','955 260 000','L–V 9–14 h']]],
+['Visitas',[['Gruta de las Maravillas','663 937 876','grutadelasmaravillas@ayto-aracena.es'],['Teatro Sierra de Aracena','663 937 879','teatro@ayto-aracena.es'],['Mezquita de Almonaster','959 143 003',''],['Parque Minero de Riotinto','959 590 025','']]],
+['Restaurantes con teléfono',[['Arrieros (Linares)','959 463 717','Solo mediodía'],['Casa El Padrino (Alájar)','959 125 601',''],['Montecruz (Aracena)','959 126 013',''],['Casa García (Almonaster)','622 950 038','Hotel-restaurante']]]];
+const tEl=document.getElementById('tels');
+const drawT=q=>{q=(q||'').toLowerCase();tEl.innerHTML=TELS.map(g=>{const r=g[1].filter(x=>!q||(x[0]+x[2]+g[0]).toLowerCase().includes(q));return r.length?'<h3 class="grp">'+g[0]+'</h3><div class="tels">'+r.map(x=>'<div class="tel'+(x[3]?' sos':'')+'"><div><b>'+x[0]+'</b>'+(x[2]?'<small>'+x[2]+'</small>':'')+'</div>'+(x[1]?tel(x[1]):'')+'</div>').join('')+'</div>':''}).join('')||'<p class="lead">Nada con ese nombre.</p>'};
+document.getElementById('q').addEventListener('input',e=>drawT(e.target.value));drawT('');
+
+/* ROUTER */
+const V=['plan','rutas','comer','ver','odiel','sos'];
+const show=()=>{const h=location.hash.slice(1),v=V.includes(h)?h:'plan';V.forEach(x=>{document.getElementById('v-'+x).classList.toggle('on',x===v)});document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})};
+document.querySelectorAll('nav.tabs a').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>scrollTo({top:0}),0)));
+addEventListener('hashchange',show);show();
+}
+</script>
+</body>
+</html>
